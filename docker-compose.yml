@@ -1,0 +1,22 @@
+# Services locaux de développement. L'application elle-même tourne avec `npm run dev`.
+# Identifiants de développement local uniquement : ne jamais les réutiliser en production.
+services:
+  db:
+    image: postgis/postgis:17-3.5
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: voisino
+      POSTGRES_PASSWORD: voisino
+      POSTGRES_DB: voisino
+    ports:
+      - "5433:5432"
+    volumes:
+      - voisino-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U voisino"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  voisino-db:

@@ -1,0 +1,1 @@
+ALTER TABLE "follows" ADD COLUMN "accepted" boolean DEFAULT true NOT NULL;
